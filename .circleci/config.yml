@@ -4,6 +4,7 @@ version: 2.1
 orbs:
   #python: circleci/python@2.1.1
   snyk: snyk/snyk@1.5.0
+  docker: circleci/docker@1.7.0
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
@@ -30,10 +31,20 @@ jobs:
           target-file: requirements.txt 
           #project: Team04
           token-variable: SYNK_TOKEN
-
+  Docker-build:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/build:
+          image: python-app 
+          tag: latest 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - Docker-build
