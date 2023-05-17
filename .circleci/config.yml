@@ -20,9 +20,11 @@ jobs:
       - checkout
       #- run: python --version
       #- run: pip --version
-      - run: python application.py
-          # name: "Say hello"
-         # command: "echo Hello, World1!"
+      - run: 
+          name: "install"
+          command: |
+             sudo pip install flask
+             python application.py
           #: sudo pip install pipenv
       - snyk/install:
           install-alpine-dependencies: true 
