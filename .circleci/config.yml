@@ -28,8 +28,8 @@ jobs:
           token-variable: SYNK_TOKEN
       - snyk/scan:
           fail-on-issues: false
-          #target-file: requirements.txt 
-          project: Team04/tree/circleci-project-setup
+          target-file: requirements.txt 
+          #project: Team04/tree/circleci-project-setup
           token-variable: SYNK_TOKEN
   Docker-build:
     docker:
