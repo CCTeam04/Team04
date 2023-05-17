@@ -18,13 +18,11 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
-      #- run: python --version
-      #- run: pip --version
       - run: 
           name: "install python dependencies"
           command: |
                pip install -r requirements.txt
-               python application.py
+               pipenv run ./start.sh
 
       - snyk/install:
           install-alpine-dependencies: true 
