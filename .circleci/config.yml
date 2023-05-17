@@ -18,7 +18,10 @@ jobs:
       - checkout
       - run:
           name: "Say hello"
-          command: "echo Hello, World1!"
+          #command: "echo Hello, World1!"
+          command: |
+             sudo pip install pipenv
+             "echo Hello, World1!"
       - snyk/install:
           install-alpine-dependencies: true 
           token-variable: SYNK_TOKEN
