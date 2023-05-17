@@ -22,7 +22,7 @@ jobs:
           name: "install python dependencies"
           command: |
                pip install -r requirements.txt
-               pipenv run ./start.sh
+               pipenv run sh ./start.sh
 
       - snyk/install:
           install-alpine-dependencies: true 
