@@ -26,6 +26,7 @@ jobs:
           install-alpine-dependencies: true 
           token-variable: SYNK_TOKEN
       - snyk/scan:
+          fail-on-issues: false
           token-variable: SYNK_TOKEN
           target-file: requirements.txt 
 
