@@ -1,13 +1,9 @@
 FROM nginx
 
-#RUN apt-get update
-#RUN apt-get install -y --no-install-recommends build-essential python3 python3-pip python3-dev
-#RUN apt
-#RUN pip3 install pipenv 
 RUN apt-get update
-RUN apt-get install python3 python3-pip software-properties-common
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get install python3.7
+RUN apt-get install -y --no-install-recommends build-essential python3 python3-pip python3-dev
+RUN apt
+RUN pip3 install pipenv 
 
 # install our code
 ADD . /home/docker/code/
