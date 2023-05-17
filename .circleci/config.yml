@@ -20,7 +20,7 @@ jobs:
           name: "Say hello"
           command: "echo Hello, World1!"
       - snyk/scan:
-          token-variable: SNYK_TOKEN
+          token-variable: SYNK_TOKEN
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
