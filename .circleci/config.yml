@@ -41,6 +41,8 @@ jobs:
       - docker/build:
           image: python-app 
           tag: latest 
+      - run:
+          docker images 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
