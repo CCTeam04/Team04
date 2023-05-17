@@ -2,6 +2,7 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 orbs:
+  python: circleci/python@2.1.1
   snyk: snyk/snyk@1.5.0
 
 # Define a job to be invoked later in a workflow.
@@ -16,11 +17,12 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
+      - python/install-packages:
+          pkg-manager: pip
       - run:
           name: "Say hello"
           #command: "echo Hello, World1!"
           command: |
-             sudo install pip
              sudo pip install pipenv
       - snyk/install:
           install-alpine-dependencies: true 
