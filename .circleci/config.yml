@@ -21,6 +21,7 @@ jobs:
           command: "echo Hello, World1!"
       - snyk/install:
           install-alpine-dependencies: true 
+          token-variable: SYNK_TOKEN
       - snyk/scan:
           token-variable: SYNK_TOKEN
 
