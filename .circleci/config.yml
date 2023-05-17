@@ -20,7 +20,7 @@ jobs:
       - checkout
       #- run: python --version
       #- run: pip --version
-      - run: python.py
+      - run: python main.py
           # name: "Say hello"
          # command: "echo Hello, World1!"
           #: sudo pip install pipenv
