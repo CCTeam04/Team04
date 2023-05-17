@@ -22,7 +22,6 @@ jobs:
           name: "install python dependencies"
           command: |
                pip install -r requirements.txt
-               cd /home/docker/code
                pipenv run sh ./start.sh
 
       - snyk/install:
