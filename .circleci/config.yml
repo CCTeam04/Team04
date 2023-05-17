@@ -22,7 +22,7 @@ jobs:
       #- run: pip --version
       - run: 
           name: "install python dependencies"
-          command: pip install -r requirements.txt
+          command: pip install -r requirements.txt 
           #: sudo pip install pipenv
       - snyk/install:
           install-alpine-dependencies: true 
