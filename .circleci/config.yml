@@ -18,11 +18,11 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
-      - run: python --version
-      - run: pip --version
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World1!"
+      #- run: python --version
+      #- run: pip --version
+      - run: python.py
+          # name: "Say hello"
+         # command: "echo Hello, World1!"
           #: sudo pip install pipenv
       - snyk/install:
           install-alpine-dependencies: true 
