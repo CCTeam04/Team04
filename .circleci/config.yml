@@ -20,6 +20,7 @@ jobs:
           name: "Say hello"
           #command: "echo Hello, World1!"
           command: |
+             sudo install pip
              sudo pip install pipenv
       - snyk/install:
           install-alpine-dependencies: true 
