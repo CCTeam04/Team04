@@ -21,10 +21,8 @@ jobs:
       #- run: python --version
       #- run: pip --version
       - run: 
-          name: "install"
-          command: |
-             sudo pip install flask
-             python application.py
+          name: "install python dependencies"
+          command: pip install -r requirements.txt
           #: sudo pip install pipenv
       - snyk/install:
           install-alpine-dependencies: true 
