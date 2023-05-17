@@ -27,6 +27,7 @@ jobs:
           token-variable: SYNK_TOKEN
       - snyk/scan:
           token-variable: SYNK_TOKEN
+          target-file: requirements.txt 
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
