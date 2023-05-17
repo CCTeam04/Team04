@@ -2,7 +2,7 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 orbs:
-  python: circleci/python@2.1.1
+  #python: circleci/python@2.1.1
   snyk: snyk/snyk@1.5.0
 
 # Define a job to be invoked later in a workflow.
@@ -12,13 +12,13 @@ jobs:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
-      - image: cimg/base:stable
+      #- image: cimg/base:stable
+      - image: cimg/python:3.11.3
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
+      - run: python --version
       - run:
           name: "Say hello"
           #command: "echo Hello, World1!"
