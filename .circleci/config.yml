@@ -27,8 +27,9 @@ jobs:
           token-variable: SYNK_TOKEN
       - snyk/scan:
           fail-on-issues: false
+          project: Team04
           token-variable: SYNK_TOKEN
-          target-file: requirements.txt 
+          #target-file: requirements.txt 
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
