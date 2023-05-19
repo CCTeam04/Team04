@@ -10,7 +10,7 @@ ADD . /home/docker/code/
 
 # Configure Nginx
 RUN ln -s /home/docker/code/nginx-app.conf /etc/nginx/conf.d/
-RUN chmod +x mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.ORIGINAL
+RUN mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.ORIGINAL
 
 # Install application requirements
 RUN (cd /home/docker/code && pipenv install)
