@@ -76,4 +76,6 @@ workflows:
       - Docker-build:
             requires:
               - scan python dependencies
-      - Push-to-ECR
+      - Push-to-ECR:
+              requires:
+                - Docker-build
