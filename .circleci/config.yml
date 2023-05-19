@@ -39,6 +39,7 @@ jobs:
       - setup_remote_docker
       - checkout
       - docker/build:
+          dockerfile: Dockerfile
           image: python-app 
           tag: latest 
       - run:
