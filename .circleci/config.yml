@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Docker-build_image
           command: |
-           docker build -t python-app -t ccteam04/python-app:latest .
+           docker build -t python-app:latest .
            docker images
            
 # Orchestrate jobs using workflows
