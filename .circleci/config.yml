@@ -5,6 +5,7 @@ orbs:
   #python: circleci/python@2.1.1
   snyk: snyk/snyk@1.5.0
   docker: circleci/docker@1.7.0
+  aws-ecr: circleci/aws-ecr@8.2.1
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
@@ -56,6 +57,15 @@ jobs:
            #docker build -t python-app:latest .
           
            #docker run -itd -p 8000:80 python-app
+  Push-to-ECR:
+     docker:
+      # replace with your preferred image
+       - image: cimg/base:stable
+     steps:
+       - setup_remote_docker:
+          docker_layer_caching: false
+       - aws-ecr/build-and-push-image:
+          repo: ccteam04 
            
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -66,3 +76,4 @@ workflows:
       - Docker-build:
             requires:
               - scan python dependencies
+      - Push-to-ECR
