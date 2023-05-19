@@ -38,16 +38,17 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
-     # - docker/build:
+      - docker/build:
       #    dockerfile: Dockerfile
-       #   image: python-app 
-        #  tag: latest 
-      - run:
-          name: Docker-build_image
-          command: |
-           docker build -t python-app:latest .
+          image: python-app 
+          tag: latest 
+      - run: |
            docker images
-           docker run -itd -p 8000:80 python-app
+          #name: Docker-build_image
+          #command: |
+           #docker build -t python-app:latest .
+          
+           #docker run -itd -p 8000:80 python-app
            
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
