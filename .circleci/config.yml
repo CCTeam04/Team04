@@ -47,7 +47,7 @@ jobs:
           command: |
            docker build -t python-app:latest .
            docker images
-           docker run -itd -p 8000:5000 python-app
+           docker run -itd -p 8000:80 python-app
            
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
