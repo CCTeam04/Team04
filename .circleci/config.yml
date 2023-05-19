@@ -62,5 +62,7 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - scan python dependencies
-      - Docker-build
+      - scan python dependencies       
+      - Docker-build:
+            requires:
+              - scan python dependencies
