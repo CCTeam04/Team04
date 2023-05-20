@@ -73,6 +73,7 @@ jobs:
        - aws-ecr/build-and-push-image:
           repo: ccteam04
           dockerfile: Dockerfile
+          tag: latest
 
   deploy-application:
     executor: docker-executor
@@ -106,7 +107,7 @@ jobs:
           name: Deploy Application
           command: |
             kubectl run my-app \
-              --image=DockerFile \
+              --image=097486265619.dkr.ecr.us-east-1.amazonaws.com/ccteam04:latest \
               --port=8080 \
               --labels=app=my-app
 
