@@ -71,7 +71,8 @@ jobs:
           docker_layer_caching: false
           #version: 20.10.14
        - aws-ecr/build-and-push-image:
-          repo: ccteam04 
+          repo: ccteam04
+          dockerfile: Dockerfile
 
   deploy-application:
     executor: docker-executor
@@ -91,6 +92,14 @@ jobs:
           name: Configure kubectl
           command: |
             aws eks update-kubeconfig --name ccproject --region $AWS_REGION
+
+      # Install kubectl
+      - run:
+          name: Install kubectl
+          command: |
+            curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+            chmod +x kubectl
+            sudo mv kubectl /usr/local/bin/
 
       # Deploy the application using the Docker image
       - run:
