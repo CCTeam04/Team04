@@ -64,7 +64,7 @@ jobs:
      steps:
        - setup_remote_docker:
           docker_layer_caching: false
-          version: 20.10.14
+          #version: 20.10.14
        - aws-ecr/build-and-push-image:
           repo: ccteam04 
            
