@@ -1,11 +1,19 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
+executors:
+  docker-executor:
+    docker:
+      - image: circleci/python:3.9
 orbs:
   #python: circleci/python@2.1.1
   snyk: snyk/snyk@1.5.0
   docker: circleci/docker@1.7.0
   aws-ecr: circleci/aws-ecr@8.2.1
+  aws-ecs: circleci/aws-ecs@3.2.0 # use the AWS ECS orb
+  aws-cli: circleci/aws-cli@3.1.1 # use the AWS CLI orb
+  aws-eks: circleci/aws-eks@2.2.0
+  kubernetes: circleci/kubernetes@1.3
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
@@ -32,7 +40,8 @@ jobs:
           target-file: requirements.txt 
           #project: Team04/tree/circleci-project-setup
           token-variable: SYNK_TOKEN
-  Docker-build:
+
+  docker-build:
     docker:
       # replace with your preferred image
       - image: cimg/base:stable
@@ -52,12 +61,8 @@ jobs:
       - run:
           name: Scan the local image with trivy
           command: sudo trivy image python-app
-          #name: Docker-build_image
-          #command: |
-           #docker build -t python-app:latest .
-          
-           #docker run -itd -p 8000:80 python-app
-  Push-to-ECR:
+
+  push-to-ecr:
      docker:
       # replace with your preferred image
        - image: cimg/base:stable
@@ -67,16 +72,42 @@ jobs:
           #version: 20.10.14
        - aws-ecr/build-and-push-image:
           repo: ccteam04 
-           
+
+  deploy-application:
+    executor: docker-executor
+    steps:
+      - checkout
+
+      # Configure kubectl for EKS cluster
+      - run:
+          name: Configure kubectl
+          command: |
+            aws eks update-kubeconfig --name ccproject --region $AWS_REGION
+
+      # Deploy the application using the Docker image
+      - run:
+          name: Deploy Application
+          command: |
+            kubectl run my-app \
+              --image=DockerFile \
+              --port=8080 \
+              --labels=app=my-app
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  build-and-deploy:
     jobs:
       - scan python dependencies       
-      - Docker-build:
+      - docker-build:
             requires:
               - scan python dependencies
-      - Push-to-ECR:
+      - push-to-ecr:
               requires:
-                - Docker-build
+                - docker-build
+      - deploy-application:
+              requires:
+                - push-to-ecr
+
+
+      
